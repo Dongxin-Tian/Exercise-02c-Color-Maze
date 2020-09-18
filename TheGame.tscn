@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Generator.gd" type="Script" id=2]
+[ext_resource path="res://Pad.gd" type="Script" id=3]
+[ext_resource path="res://GameOver.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 369.244, 449.512 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 496.75, 67.7671 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+position = Vector2( 322.817, 320.196 )
+scale = Vector2( 5.09693, 5.07352 )
+texture = ExtResource( 1 )
+
+[node name="Maze" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Player_Area" type="Node" parent="."]
+
+[node name="Player" type="KinematicBody2D" parent="Player_Area"]
+position = Vector2( 332.624, 606.814 )
+scale = Vector2( 1.552, 1 )
+collision_layer = 7
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Player_Area/Player"]
+modulate = Color( 0, 0, 0, 1 )
+scale = Vector2( 1, 0.180614 )
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player_Area/Player"]
+polygon = PoolVector2Array( -64.1855, -0.490234, -64.1855, 8.54938, 64.0512, 8.75964, 64.0512, -1.12091, 11.2849, -11.2117, -10.9988, -11.0015 )
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+position = Vector2( 2.94313, 11.7725 )
+collision_layer = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( -373.101, 296.587 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 320.986, -459.821 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 1004.51, 318.045 )
+shape = SubResource( 2 )
+
+[node name="GameOver" type="StaticBody2D" parent="."]
+collision_layer = 7
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOver"]
+position = Vector2( 339.795, 741.885 )
+shape = SubResource( 3 )
